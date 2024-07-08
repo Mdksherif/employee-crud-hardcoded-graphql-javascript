@@ -1,0 +1,161 @@
+to run the file by following command
+npm run devStart
+
+//  for single data
+ 
+ query{
+     empId,
+     empName,
+     empSalary,
+     empProfession,
+     empExperience,
+     empTechnologies,
+     empProjects{
+       projectName,
+       type
+     }
+   }
+
+
+//  for all data
+ query{
+   employees{
+     empId,
+     empName,
+     empSalary,
+     empProjects{
+       projectName,
+      type,
+       status{
+        projectStatus,
+       developerStatus,
+        projectStartDate,
+        plannedEndDate,
+        productionStatus
+       }
+     },
+     empProfession,
+     empTechnologies
+   }
+ }
+
+ employee find by id
+ 
+ query {
+   employee(empId:12345) {
+     empId
+     empName
+     empProfession
+     empSalary
+     empExperience
+     empTechnologies
+     empProjects{
+       projectName
+       type
+       status{
+         projectStatus
+         developerStatus
+         projectStartDate
+         plannedEndDate
+         productionStatus
+       }
+     }
+   }
+ }
+
+ create an employee
+
+ mutation {
+   createEmployee(input: {
+     empId: 11111,
+     empName: "New Employee",
+     empProfession: "New Profession",
+     empProjects:{
+       projectName:"demo project",
+       type:"National Project",
+       status:{
+         projectStatus:"live",
+         projectStartDate:"12/12/12",
+         productionStatus:"live",
+         plannedEndDate:"12-12-12",
+        developerStatus: "hkr"
+       }
+      
+      
+     }
+     empSalary: 600000,
+     empExperience: 3,
+     empTechnologies: ["New Tech"]
+   }) {
+   empId
+     empName
+     empProfession
+     empProjects {
+       projectName
+      type
+       status{
+         projectStatus,
+         projectStartDate,
+         productionStatus,
+         plannedEndDate,
+         developerStatus
+       }
+     }
+     empSalary
+     empExperience
+     empTechnologies
+   }
+ }
+
+//  update the existing record 
+
+ mutation {
+   updateEmployee(empId: 12345, input: {
+     empName: "Updated Name",
+     empProfession: "Updated Profession",
+     empProjects: [
+       {
+         projectName: "Updated Project",
+         type: "International Project",
+         status: [
+           {
+             projectStatus: "Ongoing",
+             developerStatus: "Active",
+             projectStartDate: "2023-01-01",
+             plannedEndDate: "2023-12-31",
+             productionStatus: "In Progress"
+           }
+         ]
+       }
+     ],
+     empSalary: 1500000,
+     empExperience: 10,
+     empTechnologies: ["Updated Tech"]
+   }) {
+     empId
+     empName
+    empProfession
+     empProjects {
+       projectName
+       type
+       status {
+         projectStatus
+         developerStatus
+         projectStartDate
+         plannedEndDate
+         productionStatus
+       }
+     }
+     empSalary
+     empExperience
+     empTechnologies
+   }
+ }
+
+//  delete the record 
+ mutation {
+   deleteEmployee(empId: 12345) {
+     empId
+     empName
+   }
+ }
